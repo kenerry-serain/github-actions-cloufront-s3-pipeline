@@ -4,6 +4,10 @@ on:
     branches:
     - main
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deployment:
     name: Frontend Deployment
