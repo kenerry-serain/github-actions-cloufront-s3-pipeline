@@ -29,7 +29,7 @@ jobs:
 
     - name: Installing Dependencies
       run: |
-        npm ci --silent
+        npm ci
 
     - name: Building the Application
       run: |
