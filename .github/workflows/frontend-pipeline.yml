@@ -1,0 +1,40 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+    - main
+
+jobs:
+  deployment:
+    name: Frontend Deployment
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22.x
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4.1.0
+      with:
+        aws-region: ${{vars.AWS_REGION}}
+        role-to-assume: ${{vars.AWS_ROLE_ARN_TO_ASSUME}}
+
+    - name: Installing Dependencies
+      run: |
+        npm ci --silent
+
+    - name: Building the Application
+      run: |
+        npm run build
+
+    - name: Sending Build to S3
+      run: |
+        aws s3 sync ./out s3://${{vars.S3_BUCKET_NAME}} --delete
+
+    - name: Invalidate CloudFront Cache
+      run: |
+        aws cloudfront create-invalidation --distribution-id ${{vars.CLOUDFRONT_DISTRIBUTION_ID}} --paths "/*"
