@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global background fix for mobile Safari */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: linear-gradient(to bottom right, #000000, #0f172a, #1e3a8a) !important;
+  background-attachment: fixed !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+}
+
+body {
+  background: linear-gradient(to bottom right, #000000, #0f172a, #1e3a8a) !important;
+  background-attachment: fixed !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#__next {
+  background: linear-gradient(to bottom right, #000000, #0f172a, #1e3a8a) !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+}
+
+/* iOS Safari specific fixes */
+@supports (-webkit-touch-callout: none) {
+  html {
+    min-height: -webkit-fill-available !important;
+    background: linear-gradient(to bottom right, #000000, #0f172a, #1e3a8a) !important;
+  }
+
+  body {
+    min-height: -webkit-fill-available !important;
+    background: linear-gradient(to bottom right, #000000, #0f172a, #1e3a8a) !important;
+  }
+
+  #__next {
+    min-height: -webkit-fill-available !important;
+    background: linear-gradient(to bottom right, #000000, #0f172a, #1e3a8a) !important;
+  }
+}
+
+/* Prevent white flash on page load */
+:root {
+  background-color: #000000 !important;
+}
+
+/* Additional mobile Safari fixes */
+@media screen and (max-width: 768px) {
+  html,
+  body {
+    background: linear-gradient(to bottom right, #000000, #0f172a, #1e3a8a) !important;
+    background-attachment: fixed !important;
+    overflow-x: hidden !important;
+  }
+}
