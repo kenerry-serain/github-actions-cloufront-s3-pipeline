@@ -29,7 +29,7 @@ jobs:
 
     - name: Installing Dependencies
       run: |
-        npm ci
+        npm install
 
     - name: Building the Application
       run: |
